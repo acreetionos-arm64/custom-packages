@@ -1,0 +1,24 @@
+pkgname=updater
+_destname1="/etc"
+pkgver=3
+pkgrel=1
+pkgdesc="updater"
+arch=('any')
+url="ssh://git@darrengames.ddns.net:2402/cobra3282000"
+license=('GPL3')
+makedepends=('git')
+depends=()
+# Remove this line: conflicts=('pacman')
+backup=('etc/pacman.conf')  # Add this instead
+provides=("${pkgname}")
+
+options=(!strip !emptydirs)
+source=(${pkgname}::"git+${url}/${pkgname}")
+sha256sums=('SKIP')
+
+package() {
+    install -Dm644 "${srcdir}/${pkgname}/etc/pacman.conf" "${pkgdir}/etc/pacman.conf"
+	install -Dm644 "${srcdir}/${pkgname}/etc/pamac.conf" "${pkgdir}/etc/pamac.conf"
+    install -Dm644 "${srcdir}/${pkgname}/etc/pacman.d/mirrorlist" "${pkgdir}/etc/pacman.d/mirrorlist"
+    install -Dm644 "${srcdir}/${pkgname}/etc/pacman.d/mirrorlist2" "${pkgdir}/etc/pacman.d/mirrorlist2"
+}

@@ -1,0 +1,64 @@
+# Maintainer: Your Name <your.email@example.com>
+
+pkgname=libxml2fix
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="Compatibility fix for libxml2 that provides both libxml2.so.2 and libxml2.so.16"
+arch=('x86_64')
+url="http://xmlsoft.org/"
+license=('MIT')
+provides=('libxml2.so.2' 'libxml2.so.16')
+conflicts=()
+depends=()
+makedepends=('zstd' 'curl')
+options=(!strip)
+
+# No source declarations - we'll download in prepare()
+source=()
+sha256sums=()
+
+prepare() {
+  cd "${srcdir}"
+  
+  # Download packages directly with curl
+  echo "Downloading libxml2-2.13.8-1..."
+  curl -L -o libxml2-old.pkg.tar.zst "https://archive.archlinux.org/packages/l/libxml2/libxml2-2.13.8-1-x86_64.pkg.tar.zst"
+  
+  echo "Downloading libxml2-2.14.2-2..."
+  curl -L -o libxml2-new.pkg.tar.zst "https://archive.archlinux.org/packages/l/libxml2/libxml2-2.14.2-2-x86_64.pkg.tar.zst"
+  
+  # Extract old version (for libxml2.so.2)
+  echo "Extracting old package..."
+  zstd -d libxml2-old.pkg.tar.zst -o libxml2-old.pkg.tar
+  mkdir -p old
+  tar -xf libxml2-old.pkg.tar -C old
+  
+  # Extract new version (for libxml2.so.16)
+  echo "Extracting new package..."
+  zstd -d libxml2-new.pkg.tar.zst -o libxml2-new.pkg.tar
+  mkdir -p new
+  tar -xf libxml2-new.pkg.tar -C new
+}
+
+package() {
+  # Create lib directory
+  install -dm755 "${pkgdir}/usr/lib"
+  
+  # Copy libxml2.so.2 files
+  cp "${srcdir}/old/usr/lib/libxml2.so.2"* "${pkgdir}/usr/lib/"
+  ln -sf libxml2.so.2.13.8 "${pkgdir}/usr/lib/libxml2.so.2"
+  
+  # Copy libxml2.so.16 files
+  cp "${srcdir}/new/usr/lib/libxml2.so.16"* "${pkgdir}/usr/lib/"
+  ln -sf libxml2.so.16.0.2 "${pkgdir}/usr/lib/libxml2.so.16"
+  
+  # Create a message file explaining the package
+  install -dm755 "${pkgdir}/usr/share/libxml2fix"
+  cat > "${pkgdir}/usr/share/libxml2fix/README" << EOF
+This package provides compatibility libraries for both libxml2.so.2 and libxml2.so.16.
+It allows applications requiring either version to function properly.
+
+Add the following to your /etc/pacman.conf to prevent conflicts:
+IgnorePkg = libxml2 libarchive
+EOF
+}

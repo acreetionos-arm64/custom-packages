@@ -1,0 +1,4 @@
+makepkg -f
+
+rm -rf calamares-config pkg/ src/
+
