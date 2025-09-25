@@ -1,0 +1,197 @@
+name: Feature Request - custom-packages
+description: Suggest a new feature for the custom-packages submodule
+title: "[Feature] custom-packages: "
+labels: ["enhancement", "custom-packages"]
+assignees:
+  - macjunkins
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Feature Request for custom-packages
+
+        Thank you for suggesting a new feature for the custom-packages submodule of AcreetionOS ARM64.
+
+        Please provide detailed information about the proposed feature.
+
+  - type: dropdown
+    id: feature-category
+    attributes:
+      label: Feature Category
+      description: What type of feature is this?
+      options:
+        - New Custom Package
+        - Package Build Enhancement
+        - Cross-compilation Improvement
+        - Calamares Installer Feature
+        - Qt/KDE Framework Integration
+        - ARM64 Optimization
+        - Build Automation
+        - Testing and Validation
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: target-package
+    attributes:
+      label: Target Package
+      description: Which package does this feature relate to?
+      options:
+        - calamares (System installer)
+        - calamares-config (Installer configuration)
+        - calamares-config-net (Network installer)
+        - lib2fix (Compatibility libraries)
+        - updater (System update tools)
+        - New package (specify in description)
+        - Build system (affects all packages)
+        - Multiple packages
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-summary
+    attributes:
+      label: Feature Summary
+      description: A clear and concise description of the proposed feature
+      placeholder: Describe the feature you would like to see
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: |
+        Describe the problem or limitation this feature addresses:
+        - Current package limitations...
+        - ARM64-specific challenges...
+        - User experience improvements needed...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: Describe your proposed implementation
+      placeholder: |
+        How would you like this feature to work?
+        - Package modifications...
+        - New build processes...
+        - User interface changes...
+        - Integration improvements...
+
+  - type: dropdown
+    id: arm64-compatibility
+    attributes:
+      label: ARM64 Compatibility
+      description: How does this feature relate to ARM64 support?
+      options:
+        - ARM64-specific feature
+        - Enhances ARM64 compatibility
+        - Cross-architecture feature
+        - No ARM64-specific considerations
+    validations:
+      required: true
+
+  - type: dropdown
+    id: milestone-alignment
+    attributes:
+      label: Milestone Alignment
+      description: Which project milestone does this feature support?
+      options:
+        - Milestone 0 - Infrastructure Setup
+        - Milestone 1 - ARM64 Conversion & First ISO
+        - Milestone 2 - Bootable System & Hardware Support
+        - Milestone 3 - AcreetionOS Identity & Branding
+        - Milestone 4 - Production Release Preparation
+        - Future Enhancement (post-v1.0)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: cross-repository-impact
+    attributes:
+      label: Cross-Repository Impact
+      description: How might this feature affect other submodules?
+      options:
+        - label: This feature requires changes in other submodules
+        - label: This feature provides new integration points
+        - label: This feature affects the build system
+        - label: This feature requires documentation updates
+        - label: This feature affects testing infrastructure
+
+  - type: textarea
+    id: upstream-considerations
+    attributes:
+      label: Upstream Considerations
+      description: |
+        How does this feature relate to upstream projects?
+        Consider impact on AcreetionOS compatibility, Calamares framework, Qt/KDE ecosystem
+      placeholder: |
+        Consider impact on:
+        - AcreetionOS upstream package compatibility
+        - Calamares framework compatibility and contributions
+        - Qt/KDE framework requirements and integration
+
+  - type: dropdown
+    id: implementation-complexity
+    attributes:
+      label: Implementation Complexity
+      description: How complex do you think this feature is to implement?
+      options:
+        - Low - Simple changes, minimal impact
+        - Medium - Moderate complexity, some integration required
+        - High - Complex implementation, significant changes
+        - Very High - Major architectural changes required
+    validations:
+      required: true
+
+  - type: textarea
+    id: testing-strategy
+    attributes:
+      label: Testing Strategy
+      description: How should this feature be tested?
+      placeholder: |
+        Describe testing approach:
+        - Cross-compilation validation...
+        - Package installation testing...
+        - Functionality testing on ARM64 hardware...
+        - Integration testing with installer...
+
+  - type: textarea
+    id: alternatives-considered
+    attributes:
+      label: Alternatives Considered
+      description: What alternative solutions have you considered?
+      placeholder: Describe any alternative approaches you've thought about
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Add any other context about the feature request:
+        - Related hardware platform requirements
+        - User experience considerations
+        - Performance implications
+        - Security considerations
+      placeholder: Any additional information that might be helpful
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validation Checklist
+      description: Please confirm you have done the following
+      options:
+        - label: I have searched existing issues and PRs for similar features
+          required: true
+        - label: I have considered the ARM64 compatibility implications
+          required: true
+        - label: I have aligned this feature with project milestones
+          required: true
+        - label: I have considered upstream compatibility requirements
+          required: true

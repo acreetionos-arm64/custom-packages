@@ -1,0 +1,171 @@
+name: Bug Report - custom-packages
+description: Report a bug in the custom-packages submodule
+title: "[Bug] custom-packages: "
+labels: ["bug", "custom-packages"]
+assignees:
+  - macjunkins
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report for custom-packages
+
+        Thank you for reporting a bug in the custom-packages submodule of AcreetionOS ARM64.
+
+        Please provide detailed information to help us diagnose and fix the issue.
+
+  - type: dropdown
+    id: bug-category
+    attributes:
+      label: Bug Category
+      description: What type of bug is this?
+      options:
+        - Package Build Failure
+        - Cross-compilation Error
+        - Qt/KDE Framework Issue
+        - Calamares Installer Problem
+        - Library Dependency Issue
+        - Package Installation Error
+        - Runtime Functionality Issue
+        - ARM64 Compatibility Problem
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-package
+    attributes:
+      label: Affected Package
+      description: Which custom package is affected?
+      options:
+        - calamares (System installer)
+        - calamares-config (Installer configuration)
+        - calamares-config-net (Network installer)
+        - lib2fix (Compatibility libraries)
+        - updater (System update tools)
+        - Multiple packages
+        - Build system (affects all packages)
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug Description
+      description: A clear and concise description of the bug
+      placeholder: Describe what happened and what you expected to happen
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: Steps to reproduce the behavior
+      placeholder: |
+        1. Set up cross-compilation environment...
+        2. Build package with command...
+        3. Install package on ARM64 system...
+        4. See error...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Development Environment
+      description: Where did this occur?
+      options:
+        - macOS ARM64 (Apple Silicon)
+        - macOS x86_64 (Intel)
+        - Linux ARM64 (native)
+        - Linux x86_64 (cross-compilation)
+        - Docker Container
+        - QEMU ARM64 emulation
+        - Raspberry Pi 4/5
+        - Other ARM64 hardware
+      default: 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System Information
+      description: |
+        Provide build and runtime environment details:
+        - Host OS and version
+        - Cross-compilation toolchain version
+        - Qt/KDE framework versions
+        - Target ARM64 hardware (if testing)
+        - Available system resources
+      placeholder: |
+        Host OS: Ubuntu 22.04 LTS
+        Toolchain: gcc-aarch64-linux-gnu 11.4.0
+        Qt Version: 5.15.8 (ARM64)
+        KDE Frameworks: 5.98.0
+        Target Hardware: Raspberry Pi 4B 8GB
+        RAM: 16GB host, 8GB target
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-output
+    attributes:
+      label: Error Output
+      description: Copy and paste any error messages or logs
+      placeholder: Paste error output here
+      render: shell
+
+  - type: dropdown
+    id: milestone-impact
+    attributes:
+      label: Milestone Impact
+      description: How does this bug affect milestone progress?
+      options:
+        - Blocking - Prevents milestone completion
+        - High - Significantly impacts milestone work
+        - Medium - Moderate impact on development
+        - Low - Minor issue, workaround available
+        - None - No milestone impact
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: cross-repository
+    attributes:
+      label: Cross-Repository Impact
+      description: Does this bug affect other submodules?
+      options:
+        - label: This bug affects other submodules
+        - label: Integration testing is required
+        - label: Submodule synchronization may be needed
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Add any other context about the problem:
+        - Package version and source information
+        - Previous successful builds or installations
+        - Custom modifications or patches applied
+        - Hardware-specific considerations
+      placeholder: Any additional information that might help
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validation Checklist
+      description: Please confirm you have done the following
+      options:
+        - label: I have searched existing issues for duplicates
+          required: true
+        - label: I have tested this on the latest version of the submodule
+          required: true
+        - label: I have included all relevant error output and logs
+          required: true
+        - label: I have provided steps to reproduce the issue
+          required: true

@@ -1,0 +1,217 @@
+name: Infrastructure Issue - custom-packages
+description: Report build system, toolchain, or CI/CD issues in custom-packages
+title: "[Infrastructure] custom-packages: "
+labels: ["infrastructure", "custom-packages"]
+assignees:
+  - macjunkins
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Infrastructure Issue for custom-packages
+
+        Report build system problems, toolchain issues, CI/CD workflow problems, or development environment issues.
+
+  - type: dropdown
+    id: infrastructure-category
+    attributes:
+      label: Infrastructure Category
+      description: What type of infrastructure issue is this?
+      options:
+        - Cross-compilation Toolchain
+        - Qt/KDE Framework Setup
+        - Package Dependencies
+        - Build Environment Configuration
+        - makepkg Configuration Issues
+        - Repository Access Problems
+        - Disk Space/Storage Issues
+        - Memory/Performance Problems
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-component
+    attributes:
+      label: Affected Component
+      description: Which component has the infrastructure issue?
+      options:
+        - Cross-compilation toolchain setup
+        - Qt5/Qt6 ARM64 libraries
+        - KDE Frameworks dependencies
+        - makepkg configuration
+        - Package repository access
+        - Build script automation
+        - Testing infrastructure
+        - Development environment
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue-description
+    attributes:
+      label: Issue Description
+      description: Clearly describe the infrastructure problem
+      placeholder: |
+        Describe the infrastructure issue:
+        - What is not working?
+        - When does the problem occur?
+        - What should be happening instead?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: affected-platform
+    attributes:
+      label: Affected Platform
+      description: Which platform(s) are affected?
+      options:
+        - macOS ARM64 (Apple Silicon)
+        - macOS x86_64 (Intel)
+        - Linux ARM64 (native)
+        - Linux x86_64 (cross-compilation host)
+        - Docker on ARM64
+        - Docker on x86_64
+        - QEMU ARM64 emulation
+        - GitHub Actions CI
+        - All platforms
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the infrastructure issue
+      placeholder: |
+        1. Set up cross-compilation environment...
+        2. Install required dependencies...
+        3. Run build command...
+        4. Observe failure...
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment-details
+    attributes:
+      label: Environment Details
+      description: |
+        Provide detailed environment information:
+        - Host operating system and version
+        - Cross-compilation toolchain details
+        - Qt/KDE framework versions and installation paths
+        - Available system resources (RAM, disk space)
+        - Package repository configuration
+        - Build tool versions (makepkg, cmake, etc.)
+      placeholder: |
+        Host OS: Ubuntu 22.04.3 LTS
+        Toolchain: gcc-aarch64-linux-gnu 11.4.0
+        Qt Version: 5.15.8 (installed via apt)
+        KDE Frameworks: 5.98.0
+        RAM: 16GB total, 12GB available
+        Disk: 500GB SSD, 200GB available
+        makepkg: 6.0.1
+        CMake: 3.22.1
+    validations:
+      required: true
+
+  - type: textarea
+    id: error-logs
+    attributes:
+      label: Error Output and Logs
+      description: Paste relevant error messages, logs, and command output
+      placeholder: Paste error output here
+      render: shell
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Issue Severity
+      description: How severely does this impact development?
+      options:
+        - Critical - Blocks all development work
+        - High - Blocks major functionality
+        - Medium - Impacts some workflows
+        - Low - Minor inconvenience, workarounds available
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: cross-compilation
+    attributes:
+      label: Cross-Compilation Issues
+      description: Is this related to ARM64 cross-compilation?
+      options:
+        - label: This is an ARM64 cross-compilation issue
+        - label: Problem affects both native and cross-compilation
+        - label: Qt/KDE framework cross-compilation specific
+        - label: Toolchain configuration issue
+        - label: Library dependency resolution problem
+
+  - type: checkboxes
+    id: submodule-impact
+    attributes:
+      label: Submodule Impact
+      description: How does this affect other submodules?
+      options:
+        - label: Affects multiple submodules
+        - label: Blocks submodule integration
+        - label: Requires coordinated fixes
+        - label: Only affects this submodule
+
+  - type: textarea
+    id: attempted-solutions
+    attributes:
+      label: Attempted Solutions
+      description: What have you tried to fix this issue?
+      placeholder: |
+        Describe what you've tried:
+        - Reinstalled cross-compilation toolchain
+        - Updated Qt/KDE packages
+        - Modified makepkg configuration
+        - Cleared build cache and temporary files
+        - Tried different package sources
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should happen when the infrastructure is working correctly?
+      placeholder: Describe the expected behavior
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Any additional context that might help:
+        - Previous successful builds and when they stopped working
+        - Recent system changes or updates
+        - Custom modifications to build environment
+        - Network configuration or proxy settings
+      placeholder: |
+        Additional information:
+        - Last successful build: 2024-01-15
+        - Recent changes: Updated to Qt 6.5.0
+        - Custom modifications: Added Pine64 support patches
+
+  - type: checkboxes
+    id: validation
+    attributes:
+      label: Validation Checklist
+      description: Please confirm you have done the following
+      options:
+        - label: I have searched existing issues for similar problems
+          required: true
+        - label: I have included complete error output and logs
+          required: true
+        - label: I have provided detailed environment information
+          required: true
+        - label: I have described steps to reproduce the issue
+          required: true
