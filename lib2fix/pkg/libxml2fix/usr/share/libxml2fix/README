@@ -1,0 +1,5 @@
+This package provides compatibility libraries for both libxml2.so.2 and libxml2.so.16.
+It allows applications requiring either version to function properly.
+
+Add the following to your /etc/pacman.conf to prevent conflicts:
+IgnorePkg = libxml2 libarchive
